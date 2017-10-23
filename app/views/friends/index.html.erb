@@ -1,0 +1,105 @@
+<div class="mb-0 mt-4">
+    <div class="row">
+        <div class="col-md-4 col-sm-4 col-lg-4">
+            <i class="fa fa-newspaper-o"></i> Friends
+            <div class="clearfix"></div>
+            <%= link_to new_friend_path do %>
+                <button type="button" class="btn btn-primary btn-sm"">
+                    <i class="fa fa-fw fa-plus"></i>
+                    New friend
+                </button>
+            <% end %>
+        </div>
+       
+    </div>
+    
+</div>
+<hr class="mt-2">
+
+
+
+    <div class="list-content">
+        <ul class="list-group">
+            <li href="#" class="list-group-item title">
+                Friend list
+            </li>
+            <% if !@friendlist.nil? %>
+                <% @friendlist.each do |friend| %>
+                    <li href="#" class="list-group-item text-left">
+                        <img class="img-thumbnail" src="<%= friend.avatar %>">
+                        <label class="name">
+                            <%= friend.fullname %><br>
+                        </label>
+                        <label class="pull-right"><br>
+                            <a href="/friends/deleterequest/<%= friend.id %>" class="btn btn-xs btn-danger fa fa-trash" title="Remove friend"></a>
+                            <a href="/friends/block/<%= friend.id %>" class="btn btn-xs btn-dark fa fa-times-circle" title="Block"></a>
+                        </label>
+                        <div class="break"></div>
+                    </li>
+                <% end %>
+            <% end %>
+        </ul>
+
+        <ul class="list-group">
+            <li href="#" class="list-group-item title">
+                Friend request
+            </li>
+            <% if !@request_list.nil? %>
+                <% @request_list.each do |friend| %>
+                    <li href="#" class="list-group-item text-left">
+                        <img class="img-thumbnail" src="<%= friend.avatar %>">
+                        <label class="name">
+                            <%= friend.fullname %><br>
+                        </label>
+                        <label class="pull-right"><br>
+                            <a href="/friends/accept/<%= friend.id %>" class="btn btn-xs btn-primary fa fa-check" title="Confirm"></a>
+                            <a href="/friends/deleterequest/<%= friend.id %>" class="btn btn-xs btn-danger fa fa-trash" title="Delete request"></a>
+                            <a href="/friends/block/<%= friend.id %>" class="btn btn-xs btn-dark fa fa-times-circle" title="Block"></a>
+                        </label>
+                        <div class="break"></div>
+                    </li>
+                <% end %>
+            <% end %>
+        </ul>
+
+        <ul class="list-group">
+            <li href="#" class="list-group-item title">
+                Waiting for accept your friend request
+            </li>
+            <% if !@wait_for_accept_list.nil? %>
+                <% @wait_for_accept_list.each do |friend| %>
+                    <li href="#" class="list-group-item text-left">
+                        <img class="img-thumbnail" src="<%= friend.avatar %>">
+                        <label class="name">
+                            <%= friend.fullname %><br>
+                        </label>
+                        <label class="pull-right"><br>
+                            <a href="/friends/deleterequest/<%= friend.id %>" class="btn btn-xs btn-danger fa fa-trash" title="Delete request"></a>
+                            <a href="/friends/block/<%= friend.id %>" class="btn btn-xs btn-dark fa fa-times-circle" title="Block"></a>
+                        </label>
+                        <div class="break"></div>
+                    </li>
+                <% end %>
+            <% end %>
+        </ul>
+
+        <ul class="list-group">
+            <li href="#" class="list-group-item title">
+                Blocked list
+            </li>
+            <% if !@blocked_list.nil? %>
+                <% @blocked_list.each do |friend| %>
+                    <li href="#" class="list-group-item text-left">
+                        <img class="img-thumbnail" src="<%= friend.avatar %>">
+                        <label class="name">
+                            <%= friend.fullname %><br>
+                        </label>
+                        <label class="pull-right"><br>
+                            <a href="/friends/unblock/<%= friend.id %>" class="btn btn-xs btn-warning fa fa-check" title="Unblock"></a>
+                        </label>
+                        <div class="break"></div>
+                    </li>
+                <% end %>
+            <% end %>
+        </ul>
+    </div>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>H2O - Soical Network</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!-- Custom fonts for this template-->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- Page level plugin CSS-->
+    <!-- <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet"> -->
+  </head>
+
+  <body class="sticky-footer bg-light" id="page-top">
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
+   
+    <a class="navbar-brand" href="<%= root_path %>"><h4><b>H2O</b></h4></a>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+      <!-- <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-file-image-o"></i>
+            <span class="nav-link-text">All messages</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseComponents">
+            <li>
+              <a class="nav-link" href="<%= messages_path %>">
+                <i class="fa fa-fw fa-eye"></i>
+                <span class="nav-link-text">View</span>
+              </a>
+            </li>
+            <li>
+              <a class="nav-link" href="<%= new_message_path %>">
+                <i class="fa fa-fw fa-plus"></i>
+                <span class="nav-link-text">New message</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Home">
+          <a class="nav-link" href="<%= messages_path %>?view=recieve">
+            <i class="fa fa-fw fa-home"></i>
+           <span class="nav-link-text">Received messages</span>
+          </a>
+        </li>
+         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Home">
+          <a class="nav-link" href="<%= messages_path %>?view=sent">
+            <i class="fa fa-fw fa-home"></i>
+           <span class="nav-link-text">Sent messages</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Blog">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-newspaper-o"></i>
+            <span class="nav-link-text">Friends</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseExamplePages">
+            <li>
+              <a class="nav-link" href="<%= friends_path %>">
+                <i class="fa fa-fw fa-eye"></i>
+                <span class="nav-link-text">View</span>
+              </a>
+            </li>
+            <li>
+              <a class="nav-link" href="<%= new_friend_path %>">
+                <i class="fa fa-fw fa-plus"></i>
+                <span class="nav-link-text">Add new friend</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="About">
+          <a class="nav-link" href="<%= about_path %>">
+            <i class="fa fa-fw fa-link"></i>
+            <span class="nav-link-text">About</span>
+          </a>
+        </li>
+     
+      </ul> -->
+      <ul class="navbar-nav ml-auto">
+        <% if logged_in? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle mr-lg-2" data-toggle="dropdown" aria-haspopup="true">
+              Hi, <%= current_account.fullname %>! <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Profile", current_account, class:"dropdown-item" %></li>
+              <div class="dropdown-divider"></div>
+              <li>
+                <%= link_to "Log out", logout_path, method: :delete, class:"dropdown-item" %>
+              </li>
+            </ul>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= signup_path %>">
+              <i class="fa fa-fw fa-sign-out"></i>Signup
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= login_path %>">
+              <i class="fa fa-fw fa-key"></i>Login
+            </a>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+    <!-- <div class="content-wrapper"> -->
+    <!-- <div class="container-fluid"> -->
+        <!-- Breadcrumbs-->
+       <!--  <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="<%= home_index_path %>">Home</a>
+          </li>
+          <li class="breadcrumb-item active">My Home</li>
+        </ol> -->
+        <!-- Page content-->
+      <div class="row">
+        <% if logged_in? %>
+          <div class="col-sm-2 col-md-2 col-lg-2 my-button-side-left">
+            <a class="btn btn-block btn-dark" href="<%= root_path %>">
+              All messages
+            </a>
+            <a class="btn btn-block btn-dark" href="<%= messages_path %>?view=recieve">
+              Recieved messages
+            </a>
+            <a class="btn btn-block btn-dark" href="<%= messages_path %>?view=sent">
+              Sent messages
+            </a>
+            <a class="btn btn-block btn-dark" href="<%= new_message_path %>">
+              <i class="fa fa-fw fa-plus"></i>
+              New message
+            </a>
+            <a class="btn btn-block btn-dark" href="<%= friends_path %>">
+              Friends
+            </a>
+            <%= link_to "Log out", logout_path, method: :delete, class:"btn btn-block btn-dark" %>
+          </div>
+          <div class="col-sm-10 col-md-10 col-lg-10 my-container">
+        <% else %>
+          <div class="col-sm-12 col-md-12 col-lg-12">
+        <% end %>
+          <%= yield %>
+        </div>
+      </div>
+        
+    <!-- </div> -->
+    <!-- </div> -->
+    <!-- Scroll to Top Button-->
+    <!-- <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a> -->
+    
+  </body>
+</html>
