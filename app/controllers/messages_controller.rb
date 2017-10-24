@@ -41,7 +41,7 @@ class MessagesController < ApplicationController
 
 		@conversation.update(last_message_id: @message.id)
 
-		UserMailer.notification(friend_id,current_account).deliver_now
+		UserMailer.notification(friend_id,current_account).deliver_later
 		
 		redirect_to (messages_path + "?view=sent")
 	end
